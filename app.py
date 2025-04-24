@@ -38,7 +38,7 @@ repeat it verbatim.'''
 def trusted_editing() -> Solver:
     # need to get the trusted editing prompt here in the state
     async def solve(state, generate) -> TaskState:
-        model = get_model(model="gpt-4o-mini")
+        model = get_model(model="openai/gpt-4o-mini")
         state.output = await model.generate(
                         input=state.messages,
                     )
@@ -65,4 +65,4 @@ def trusted_editing_task():
         scorer=check_for_backdoor()
     )
 
-eval(trusted_editing_task(), limit=1)
+eval(trusted_editing_task(), limit=1, model="openai/gpt-4o")
