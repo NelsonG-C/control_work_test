@@ -97,11 +97,6 @@ def record_to_sample_factory(
             logger.warning("Error parsing metadata", e, "METADATA: |", record, "|")
             return no_samples
 
-        print('Sample',  Sample(
-            input=record["question"],
-            id=record["problem_id"],
-            metadata=metadata.model_dump(),
-        ))
         return Sample(
             input=record["question"],
             id=record["problem_id"],
@@ -141,6 +136,7 @@ def get_dataset(
         sample_fields=record_to_sample_factory(mode),
         split="test",
         trust=True,
+        limit=10
     )
 
     if dataset_name == "backdoor":
